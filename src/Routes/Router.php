@@ -19,7 +19,7 @@ class Router
                 
                 break;
 
-            case '/api/testing':
+            case '/':
                 if ($method === 'GET') {
                     echo json_encode(['Ok' => 'Server Working...']);
                 }
