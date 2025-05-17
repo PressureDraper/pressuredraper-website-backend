@@ -15,13 +15,15 @@ class Router
                 } else {
                     http_response_code(405);
                     echo json_encode(['error' => 'Method not allowed']);
+                    exit;
                 }
-                
+
                 break;
 
             case '/':
                 if ($method === 'GET') {
                     echo json_encode(['Ok' => 'Server Working...']);
+                    exit;
                 }
 
                 break;
@@ -29,7 +31,7 @@ class Router
             default:
                 http_response_code(404);
                 echo json_encode(['error' => 'Path not found.']);
-                break;
+                exit;
         }
     }
 }

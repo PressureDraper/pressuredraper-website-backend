@@ -14,14 +14,14 @@ class EmailController
         if (!isset($data['email'], $data['name'], $data['message'], $data['topic'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Missing required fields.']);
-            return;
+            exit;
         }
 
         // Validar formato de email
         if (!Validator::isValidEmail($data['email'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Invalid Email. Please try again.']);
-            return;
+            exit;
         }
 
         $sent = Mailer::emailService($data);
@@ -29,9 +29,11 @@ class EmailController
         if ($sent) {
             http_response_code(200);
             echo json_encode(['message' => 'Email sent successfully. We will reach you in short.']);
+            exit;
         } else {
             http_response_code(500);
             echo json_encode(['error' => 'Server error. Contact the administrator.']);
+            exit;
         }
     }
 }
