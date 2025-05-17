@@ -20,7 +20,7 @@ class EmailController
         // Validar formato de email
         if (!Validator::isValidEmail($data['email'])) {
             http_response_code(400);
-            echo json_encode(['error' => 'Invalid Email']);
+            echo json_encode(['error' => 'Invalid Email. Please try again.']);
             return;
         }
 
@@ -28,7 +28,7 @@ class EmailController
 
         if ($sent) {
             http_response_code(200);
-            echo json_encode(['message' => 'Email sent successfully.']);
+            echo json_encode(['message' => 'Email sent successfully. We will reach you in short.']);
         } else {
             http_response_code(500);
             echo json_encode(['error' => 'Server error. Contact the administrator.']);

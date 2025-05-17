@@ -25,11 +25,11 @@ class Mailer
             $mail->addAddress($_ENV['SMTP_USER'], 'Receiver');
 
             $mail->isHTML(true);
-            $mail->Subject = strtoupper("WEBSITE MESSAGE");
+            $mail->Subject = "WEBSITE MESSAGE";
 
             $message =
                 "Topic: " . $data['topic'] . "\n" .
-                "Name: " . $data['name'] . "\n" .
+                "Name: " . strtoupper($data['name']) . "\n" .
                 "Email: " . $data['email'] . "\n" .
                 "Message: " . $data['message'];
 
