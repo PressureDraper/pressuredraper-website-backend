@@ -38,8 +38,11 @@ class App
 
     private function loadEnv(): void
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-        $dotenv->load();
+        $envPath = __DIR__ . '/../.env';
+        if (file_exists($envPath)) {
+            $dotenv = Dotenv::createImmutable(dirname($envPath));
+            $dotenv->load();
+        }
     }
 
     private function parseRequest(): void

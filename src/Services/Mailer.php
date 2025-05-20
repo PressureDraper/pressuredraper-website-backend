@@ -14,15 +14,16 @@ class Mailer
 
         try {
             $mail->isSMTP();
-            $mail->Host       = $_ENV['SMTP_HOST'];
+            $mail->Host       = $_ENV['SMTP_HOST'] ?? getenv('SMTP_HOST');
             $mail->SMTPAuth   = true;
-            $mail->Username   = $_ENV['SMTP_USER'];
-            $mail->Password   = $_ENV['SMTP_PASSWORD'];
+            $mail->Username   = $_ENV['SMTP_USER'] ?? getenv('SMTP_USER');
+            $mail->Password   = $_ENV['SMTP_PASSWORD'] ?? getenv('SMTP_PASSWORD');
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = $_ENV['SMTP_PORT'];
+            $mail->Port       = $_ENV['SMTP_PORT'] ?? getenv('SMTP_PORT');
 
-            $mail->setFrom($_ENV['SMTP_USER'], $data['name']);
-            $mail->addAddress($_ENV['SMTP_USER'], 'Receiver');
+            $fromEmail = $_ENV['SMTP_USER'] ?? getenv('SMTP_USER');
+            $mail->setFrom($fromEmail, $data['name']);
+            $mail->addAddress($fromEmail, 'Receiver');
 
             $mail->isHTML(true);
             $mail->Subject = "WEBSITE MESSAGE";
